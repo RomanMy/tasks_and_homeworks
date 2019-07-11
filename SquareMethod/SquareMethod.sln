@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquareMethod", "SquareMethod\SquareMethod.csproj", "{89F1752A-C4BB-4CA2-AA76-19C18E5CE7D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquareMethod.Test", "SquareMethod.Test\SquareMethod.Test.csproj", "{11CE4893-3AC8-4211-BCEA-287D9D44B781}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89F1752A-C4BB-4CA2-AA76-19C18E5CE7D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89F1752A-C4BB-4CA2-AA76-19C18E5CE7D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89F1752A-C4BB-4CA2-AA76-19C18E5CE7D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89F1752A-C4BB-4CA2-AA76-19C18E5CE7D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11CE4893-3AC8-4211-BCEA-287D9D44B781}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11CE4893-3AC8-4211-BCEA-287D9D44B781}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11CE4893-3AC8-4211-BCEA-287D9D44B781}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11CE4893-3AC8-4211-BCEA-287D9D44B781}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C51E12F-56A3-406E-9C41-DF67F515B738}
+	EndGlobalSection
+EndGlobal
