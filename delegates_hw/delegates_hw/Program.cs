@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace delegates_hw
-{
-   
-    static class MathClass
+{  
+    public static class MathClass
     {
         public static List<int> Evens(params int[] args)
         {
@@ -19,48 +16,154 @@ namespace delegates_hw
             }
             return y;
         }
-        public delegate List<int> Del(int[] x);
-        public static int Sum_(Del x, params int[] args)
+        public static List<int> Odds(params int[] args)
         {
-            List<int> filtered = x(args);
-           
-            int result = 0;
-            foreach (int i in filtered)
-                result += i;
-            return result;
-        }
-        public static int Max_(Del x, params int[] args)
-        {
-            List<int> filtered = x(args);
-            
-            int result = 0;
-            foreach(int i in filtered)
+            List<int> y = new List<int>();
+            foreach (int n in args)
             {
-                if (i > result)
-                    result = i;
+                if (n % 2 != 0)
+                    y.Add(n);
             }
-            return result;
+            return y;
         }
-        public static int Avg_(Del x, params int[] args)
+
+        public delegate List<int> Del_1(int[] x);
+
+        public static int Sum_(Del_1 x, params int[] args)
         {
-            List<int> filtered = x(args);
-            
-            int result = 0;
-            foreach (int i in filtered)
-                result += i;
-            return result / filtered.Count();
+            if(x != null)
+            {
+                List<int> filtered = x(args);
+                int result = 0;
+                foreach (int i in filtered)
+                    result += i;
+                return result;
+            }
+            else
+            {
+                List<int> unfiltered = new List<int>();
+                foreach (var i in args)
+                    unfiltered.Add(i);
+                int result = 0;
+                foreach (int i in unfiltered)
+                    result += i;
+                return result;
+            }
         }
+        public static int Max_(Del_1 x, params int[] args)
+        {
+            if(x != null)
+            {
+                List<int> filtered = x(args);
+                int result = 0;
+                foreach (int i in filtered)
+                {
+                    if (i > result)
+                        result = i;
+                }
+                return result;
+            }
+            else
+            {
+                List<int> unfiltered = new List<int>();
+                foreach (var i in args)
+                    unfiltered.Add(i);
+                int result = 0;
+                foreach (int i in unfiltered)
+                {
+                    if (i > result)
+                        result = i;
+                }
+                return result;
+            }
+        }
+        public static int Avg_(Del_1 x, params int[] args)
+        {
+            if(x != null)
+            {
+                List<int> filtered = x(args);
+                int result = 0;
+                foreach (int i in filtered)
+                    result += i;
+                return result / filtered.Count();
+            }
+            else
+            {
+                List<int> unfiltered = new List<int>();
+                foreach (var i in args)
+                    unfiltered.Add(i);
+                int result = 0;
+                foreach (int i in unfiltered)
+                    result += i;
+                return result / unfiltered.Count();
+            }
+            
+        }
+
+        public delegate int Del_2(Del_1 x, int[] args);
     }
     class Program
     {
-        static void Main(string[] args)
+        public static void Output(MathClass.Del_1 del_1, MathClass.Del_2 del_2, int[] arr)
         {
-            int first = MathClass.Sum_(MathClass.Evens, 10, 20, 30, 1);
-            int second = MathClass.Max_(MathClass.Evens, 10, 20, 30, 21);
-            int third = MathClass.Avg_(MathClass.Evens, 10, 20, 30, 41);
-            Console.WriteLine(first);
-            Console.WriteLine(second);
-            Console.WriteLine(third);
+            int? result = del_2?.Invoke(del_1, arr);
+            Console.WriteLine(result);
+        }
+        static void Main(string[] args)
+        {   
+            Console.WriteLine("Enter an array of integers:");
+            string ints_string = Console.ReadLine();
+
+            string[] ints_string_array = ints_string.Split(new string[] { " ", ",", ", " },
+                StringSplitOptions.RemoveEmptyEntries);
+            var ints_array = new int[ints_string_array.Length];
+            for(var i = 0; i < ints_string_array.Length; i++)
+            {
+                ints_array[i] = Convert.ToInt32(ints_string_array[i]);
+            }
+
+            Console.WriteLine("Enter 'evens' or 'odds':");
+            string filter = Console.ReadLine().ToLower();
+
+            Console.WriteLine("Enter 'sum', 'max' or 'avg':");
+            string action = Console.ReadLine().ToLower();
+
+            MathClass.Del_1 del_filter = null;
+
+            if (filter == "evens")
+            {
+                del_filter = MathClass.Evens;
+            }
+            else if (filter == "odds")
+            {
+                del_filter = MathClass.Odds;
+            }
+            else
+            {
+                Console.WriteLine("You entered invalid filter. It should be either 'evens' or 'odds'." +
+                    "Given array was not filtered.");
+            }
+
+            MathClass.Del_2 del_action = null;
+
+            if (action == "sum")
+            {
+                del_action = MathClass.Sum_;
+            }
+            else if(action == "max")
+            {
+                del_action = MathClass.Max_;
+            }
+            else if(action == "avg")
+            {
+                del_action = MathClass.Avg_;
+            }
+            else
+            {
+                Console.WriteLine("You entered invalid action. It should be either 'sum', 'max' or 'avg'.");
+            }
+
+            Output(del_filter, del_action, ints_array);
             Console.ReadKey();
         }
     }
