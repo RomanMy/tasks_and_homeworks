@@ -36,14 +36,14 @@ namespace merging_collections
             var result = drivers.Join(teams, dr => dr.Team, t => t.Name,
                 (dr, t) => new { Name = dr.Name, Team = dr.Team, Country = t.Country });
                          
-            //foreach (var item in result)
-            //    Console.WriteLine($"{item.Name} - {item.Team} ({item.Country})");
+            foreach (var item in result)
+                Console.WriteLine($"{item.Name} - {item.Team} ({item.Country})");
 
             var result2 = teams.GroupJoin(drivers,
                 t => t.Name,
                 dr => dr.Team,
                 (team, drs) => new { Name = team.Name, Country = team.Country, Drivers = drs.Select(dr => dr.Name) });
-            /*foreach(var team in result2)
+            foreach(var team in result2)
             {
                 Console.WriteLine($"{team.Name} - {team.Country}");
                 
@@ -52,7 +52,7 @@ namespace merging_collections
                     Console.WriteLine("driver");
                 }
                 Console.WriteLine();
-            }*/
+            }
 
             var result3 = drivers.Zip(teams,
                 (driver, team) => new { Name = driver.Name, Team = team.Name, Country = team.Country });

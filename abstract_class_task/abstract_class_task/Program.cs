@@ -166,12 +166,12 @@ namespace abstract_class_task
             ProceedInput();
             ProceedInput();
             ProceedInput();
-            //ProceedInput();
-            //ProceedInput();
-            //ProceedInput();
-            //ProceedInput();
-            //ProceedInput();
-            //ProceedInput();
+            ProceedInput();
+            ProceedInput();
+            ProceedInput();
+            ProceedInput();
+            ProceedInput();
+            ProceedInput();
             Console.WriteLine("Entered shapes:");
             foreach (var i in shapes)
             {
